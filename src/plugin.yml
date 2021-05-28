@@ -1,0 +1,19 @@
+name: ServerManagerTools
+version: 1.0.0
+author: Naruse
+main: fr.naruse.tools.main.ToolsPlugin
+commands:
+  tp:
+  tphere:
+    aliases:
+      - tph
+  tpserverhere:
+    aliases:
+      - tpsh
+  kick:
+  find:
+  pmp:
+  pms:
+  staffchat:
+    aliases:
+      - sc
