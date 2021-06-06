@@ -29,7 +29,7 @@ public class StaffChatCommand extends AbstractCommand {
         }
 
         if(args.length == 0){
-            return sendMessage(sender, "§6/§7pmp <Message>");
+            return sendMessage(sender, "§6/§7sc <Message>");
         }
 
         StringBuilder stringBuilder = new StringBuilder();
@@ -39,7 +39,8 @@ public class StaffChatCommand extends AbstractCommand {
         String msg = "§e§lStaffChat §r§c"+sender.getName()+" §7§l» §r§d"+stringBuilder.toString().trim().replace("&", "§");
 
         PacketStaffChat packetStaffChat = new PacketStaffChat(msg);
-        for (Server server : ServerList.findServer(CoreServerType.BUKKIT_MANAGER)) {
+
+        for (Server server : ServerList.findServer(CoreServerType.BUKKIT_MANAGER, CoreServerType.SPONGE_MANAGER)) {
             if(server.equals(ServerManager.get().getCurrentServer())){
                 pl.getProcessPacketListener().processAllPackets(packetStaffChat);
             }else{

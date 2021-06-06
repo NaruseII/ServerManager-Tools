@@ -29,11 +29,11 @@ public class FindCommand extends AbstractCommand {
             return sendMessage(sender, "§4Player §coffline§6.");
         }
 
-        Optional<Server> optionalBungee = ServerList.findPlayerBungeeServer(args[0]);
-        if(!optionalBungee.isPresent()){
-            return sendMessage(sender, "§4Player §7"+args[0]+" §6 is connected on §a"+optionalBukkit.get().getName()+" §6and on Proxy §a"+optionalBungee.get().getName()+"§6.");
+        Optional<Server> optionalBungee = ServerList.findPlayerProxyServer(args[0]);
+        if(optionalBungee.isPresent()){
+            return sendMessage(sender, "§6Player §7"+args[0]+" §6is connected on §7"+optionalBukkit.get().getName()+" §6and on Proxy §7"+optionalBungee.get().getName()+"§6.");
         }
 
-        return sendMessage(sender, "§4Player §7"+args[0]+" §6 is connected on §a"+optionalBukkit.get().getName()+"§6.");
+        return sendMessage(sender, "§6Player §7"+args[0]+" §6is connected on §7"+optionalBukkit.get().getName()+"§6.");
     }
 }

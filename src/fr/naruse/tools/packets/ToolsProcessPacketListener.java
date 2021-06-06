@@ -2,10 +2,14 @@ package fr.naruse.tools.packets;
 
 import com.google.common.collect.Lists;
 import fr.naruse.servermanager.core.connection.packet.IPacket;
+import fr.naruse.servermanager.core.connection.packet.PacketDatabaseRequest;
+import fr.naruse.servermanager.core.connection.packet.PacketDatabaseRequestUpdate;
 import fr.naruse.servermanager.core.connection.packet.ProcessPacketListener;
+import fr.naruse.servermanager.core.database.Database;
 import fr.naruse.servermanager.core.logging.ServerManagerLogger;
 import fr.naruse.tools.commands.PacketStaffChat;
 import fr.naruse.tools.main.ToolsPlugin;
+import fr.naruse.tools.utils.FreezeManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -17,6 +21,14 @@ public class ToolsProcessPacketListener extends ProcessPacketListener {
 
     public ToolsProcessPacketListener(ToolsPlugin pl) {
         this.pl = pl;
+    }
+
+    @Override
+    public void processDatabaseRequestUpdate(PacketDatabaseRequestUpdate p) {
+        PacketDatabaseRequest packet = p.getPacket();
+        if(packet.getAction() == PacketDatabaseRequest.Action.PUT && packet.getDataObject() != null && packet.getKey() != null && packet.getKey().equals(FreezeManager.KEY)){
+            Bukkit.getScheduler().runTask(pl, () -> FreezeManager.FROZEN_LIST = Database.DataType.LIST.cast(packet.getDataObject().getValue()));
+        }
     }
 
     @Override
@@ -111,7 +123,7 @@ public class ToolsProcessPacketListener extends ProcessPacketListener {
     }
 
     private void processStaffChat(PacketStaffChat packet) {
-        for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+        for (Player p : Bukkit.getOnlinePlayers()) {
             if (p.hasPermission("servermanager.tools.commands.staffchat")) {
                 p.sendMessage(packet.getMessage());
             }

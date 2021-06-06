@@ -37,7 +37,7 @@ public class TeleportHereCommand extends AbstractCommand {
         }else if(ServerList.isPlayerOnline(args[0])){
 
             Optional<Server> optionalPlayerServer = ServerList.findPlayerBukkitServer(p.getUniqueId());
-            Optional<Server> optionalTargetBungee = ServerList.findPlayerBungeeServer(args[0]);
+            Optional<Server> optionalTargetBungee = ServerList.findPlayerProxyServer(args[0]);
 
             if(!optionalTargetBungee.isPresent()){
                 return sendMessage(sender, "§cThis player need to be on a Proxy to be teleported to another server!");

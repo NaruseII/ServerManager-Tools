@@ -47,7 +47,7 @@ public class TeleportServerHereCommand extends AbstractCommand {
 
         for (String name : server.getData().getUUIDByNameMap().keySet()) {
 
-            Optional<Server> optional = ServerList.findPlayerBungeeServer(name);
+            Optional<Server> optional = ServerList.findPlayerProxyServer(name);
 
             if(optional.isPresent()){
                 count++;

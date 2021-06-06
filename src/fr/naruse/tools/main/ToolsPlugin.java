@@ -1,17 +1,22 @@
 package fr.naruse.tools.main;
 
+import com.google.common.collect.Lists;
 import fr.naruse.servermanager.core.ServerManager;
 import fr.naruse.servermanager.core.connection.packet.Packets;
 import fr.naruse.tools.commands.*;
 import fr.naruse.tools.packets.*;
+import fr.naruse.tools.utils.FreezeManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ToolsPlugin extends JavaPlugin {
 
     private ToolsProcessPacketListener processPacketListener;
+    private FreezeManager freezeManager;
 
     @Override
     public void onEnable() {
+        this.freezeManager = new FreezeManager(this);
+        this.getServer().getPluginManager().registerEvents(this.freezeManager, this);
         this.registerCommands();
         this.registerPackets();
     }
@@ -25,6 +30,7 @@ public class ToolsPlugin extends JavaPlugin {
         this.getCommand("pmp").setExecutor(new PmpCommand(this));
         this.getCommand("pms").setExecutor(new PmsCommand(this));
         this.getCommand("staffChat").setExecutor(new StaffChatCommand(this));
+        this.getCommand("freeze").setExecutor(new FreezeCommand(this));
     }
 
     private void registerPackets() {
