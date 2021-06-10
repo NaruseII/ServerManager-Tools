@@ -1,0 +1,11 @@
+***
+servermanager.tools.commands.find
+servermanager.tools.commands.freeze
+servermanager.tools.commands.kick
+servermanager.tools.commands.msg
+servermanager.tools.commands.staffchat
+servermanager.tools.commands.pmp
+servermanager.tools.commands.pms
+servermanager.tools.commands.tp
+servermanager.tools.commands.tphere
+servermanager.tools.commands.tpserverhere
